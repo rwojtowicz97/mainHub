@@ -1,13 +1,20 @@
 package main
 
 import (
-	"github.com/rwojtowicz97/mainHub/api"
-	"github.com/rwojtowicz97/mainHub/configs"
+	"net/http"
+
+	"github.com/rwojtowicz97/mainHub/internal"
 )
 
 func main() {
-	conf := configs.Config{
-		Port: ":8080",
-	}
-	api.Init(conf)
+	client := http.Client{}
+
+	tw := internal.NewChannel("h2p_gucio", &client)
+
+	tw.CheckIfLive()
+
+	// conf := configs.Config{
+	// 	Port: ":3000",
+	// }
+	// api.Init(conf)
 }
